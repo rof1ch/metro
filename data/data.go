@@ -16,7 +16,7 @@ func OpenDatabase() error {
 	if err != nil {
 		return err
 	}
-    
+
 	return db.Ping()
 }
 
@@ -44,35 +44,43 @@ func CreateTable() {
         foreign key(station_id) references station(id)
         );`
 
-    statement, err := db.Prepare(createTableRoleSQL)
-    if err != nil{
-        log.Fatal(err.Error())
-    }
-    statement.Exec()
-    fmt.Println("table role created")
+	statement, err := db.Prepare(createTableRoleSQL)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	statement.Exec()
+	fmt.Println("table role created")
 
-    statement, err = db.Prepare(createTableStationSQL)
-    if err != nil{
-        log.Fatal(err.Error())
-    }
-    statement.Exec()
-    fmt.Println("table station created")
+	statement, err = db.Prepare(createTableStationSQL)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	statement.Exec()
+	fmt.Println("table station created")
 
-    statement, err = db.Prepare(createTableUserSQL)
-    if err != nil{
-        log.Fatal(err.Error())
-    }
-    statement.Exec()
-    fmt.Println("table user created")
+	statement, err = db.Prepare(createTableUserSQL)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	statement.Exec()
+	fmt.Println("table user created")
 
-    statement, err = db.Prepare(createTableStationVisitSQL)
-    if err != nil{
-        log.Fatal(err.Error())
-    }
-    statement.Exec()
-    fmt.Println("table stationVisit created")
+	statement, err = db.Prepare(createTableStationVisitSQL)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	statement.Exec()
+	fmt.Println("table stationVisit created")
 }
 
-// func InsertRole() {
-//     insertRoleSQL
-// }
+func InsertRole(role_name string) {
+	insertRoleSQL := `insert into role(name) 
+                    values ($1)`
+
+	result, err := db.Exec(insertRoleSQL, role_name)
+	if err != nil {
+		log.Println(err)
+	}
+	fmt.Println(result.RowsAffected())
+    fmt.Println("Успешно добавлено")
+}
