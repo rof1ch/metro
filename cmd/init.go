@@ -9,8 +9,8 @@ import (
 // initCmd represents the init command
 var initCmd = &cobra.Command{
 	Use:   "init",
-	Short: "Initialise a new metro database and table",
-	Long:  `Initialise a new metro database and table`,
+	Short: "Иницилизация и создание таблиц базы данных",
+	Long:  `Иницилизация и создание таблиц базы данных`,
 	Run: func(cmd *cobra.Command, args []string) {
 		data.CreateTable()
 	},
